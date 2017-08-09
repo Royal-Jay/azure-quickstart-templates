@@ -41,6 +41,10 @@
     "namespace": {
       "type": "string",
       "defaultValue": ""
+    },
+    "networkResourceGroupName":{
+      "type":"string",
+      "defaultValue": ""
     }
   },
   "variables": {},
