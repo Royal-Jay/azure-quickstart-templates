@@ -56,6 +56,10 @@
       "metadata": {
         "description": "Namespace for resources created by this template"
       }
+    },
+    "networkResourceGroupName":{
+      "type":"string",
+      "defaultValue": ""
     }
   },
   "variables": {},
@@ -96,6 +100,10 @@
     "namespace": {
       "type": "string",
       "value": "[parameters('namespace')]"
+    },
+    "networkResourceGroupName":{
+      "type":"string",
+      "value": "[parameters('networkResourceGroupName')]"
     }
   }
 }
