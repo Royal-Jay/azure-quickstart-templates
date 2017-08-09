@@ -38,11 +38,17 @@
       "metadata": {
         "description": "Elasticsearch deployment platform settings"
       }
+    },
+    "networkResourceGroupName":{
+      "type":"string",
+      "metadata": {
+        "description":"Resource Group name for the network resource group"
+      }
     }
   },
   "variables": {
     "vmSize": "Standard_A0",
-    "subnetRef": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('subnet').vnet), '/subnets/', parameters('subnet').name)]",
+    "subnetRef": "[concat(resourceId(parameters('networkResourceGroupName'),'Microsoft.Network/virtualNetworks', parameters('subnet').vnet), '/subnets/', parameters('subnet').name)]",
     "vmName": "[concat(parameters('namespace'), '-vm')]",
     "publicIpName": "[concat(parameters('namespace'), '-pip')]",
     "securityGroupName": "[concat(parameters('namespace'), '-nsg')]",

@@ -33,6 +33,7 @@
     }
   },
   "variables": {
+    "networkResourceGroupName": "[parameters('networkSettings').networkResourceGroupName]",
     "storageAccountName": "[parameters('storageSettings').prefix]",
     "storageAccountNameAFS": "[parameters('storageSettings').afs]",
     "storageAccountNameShared": "[parameters('storageSettings').shared]",
@@ -51,7 +52,7 @@
         "Name": "LBFE",
         "Properties": {
           "subnet": {
-            "Id": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('networkSettings').virtualNetworkName), '/subnets/', parameters('networkSettings').subnet.other.name)]"
+            "Id": "[concat(resourceId(resourceId(variables('networkResourceGroupName'),'Microsoft.Network/virtualNetworks', parameters('networkSettings').virtualNetworkName), '/subnets/', parameters('networkSettings').subnet.other.name)]"
           },
           "privateIPAddress": "[parameters('ilbIpAddress')]",
           "privateIPAllocationMethod": "Static"
@@ -104,39 +105,7 @@
         "publicIPAllocationMethod": "Static"
       }
     },
-    {
-      "apiVersion": "2016-03-30",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('networkSettings').virtualNetworkName]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[parameters('networkSettings').addressPrefix]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[parameters('networkSettings').subnet.master.name]",
-            "properties": {
-              "addressPrefix": "[parameters('networkSettings').subnet.master.prefix]"
-            }
-          },
-          {
-            "name": "[parameters('networkSettings').subnet.data.name]",
-            "properties": {
-              "addressPrefix": "[parameters('networkSettings').subnet.data.prefix]"
-            }
-          },
-          {
-            "name": "[parameters('networkSettings').subnet.other.name]",
-            "properties": {
-              "addressPrefix": "[parameters('networkSettings').subnet.other.prefix]"
-            }
-          }
-        ]
-      }
-    },
+    
     {
       "apiVersion": "2016-03-30",
       "name": "es-load-balancer",

@@ -50,10 +50,16 @@
       "metadata": {
         "description": "Namespace for resources created by this template"
       }
+    },
+    "networkResourceGroupName":{
+      "type":"string",
+      "metadata": {
+        "description":"Resource Group name for the network resource group"
+      }
     }
   },
   "variables": {
-    "subnetRef": "[concat(resourceId('Microsoft.Network/virtualNetworks', parameters('subnet').vnet), '/subnets/', parameters('subnet').name)]",
+    "subnetRef": "[concat(resourceId(parameters('networkResourceGroupName'),'Microsoft.Network/virtualNetworks', parameters('subnet').vnet), '/subnets/', parameters('subnet').name)]",
     "storageAccountName": "[parameters('storageSettings').shared]",
     "storageAccountNameAFS": "[parameters('storageSettings').afs]",
     "vmName": "[concat(parameters('namespace'), '-vm')]",
