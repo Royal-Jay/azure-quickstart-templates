@@ -52,7 +52,7 @@
         "Name": "LBFE",
         "Properties": {
           "subnet": {
-            "Id": "[concat(resourceId(resourceId(variables('networkResourceGroupName'),'Microsoft.Network/virtualNetworks', parameters('networkSettings').virtualNetworkName), '/subnets/', parameters('networkSettings').subnet.other.name)]"
+            "Id": "[concat(resourceId(variables('networkResourceGroupName'),'Microsoft.Network/virtualNetworks', parameters('networkSettings').virtualNetworkName), '/subnets/', parameters('networkSettings').subnet.other.name)]"
           },
           "privateIPAddress": "[parameters('ilbIpAddress')]",
           "privateIPAllocationMethod": "Static"
